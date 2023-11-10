@@ -8,31 +8,82 @@ const Menu = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 6;
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchOption, setSearchOption] = useState('foodName'); // 기본값은 음식명
 
   useEffect(() => {
     fetchRecipes();
   }, []); //컴포넌트가 마운트될때 한번만 실행
 
-  const fetchRecipes = async () => {
+  /*const fetchRecipes = async () => {
     const filePath = '/data/RecipeWithCal.json';
     try {
       const response = await fetch(filePath);
       const data = await response.json();
-      console.log(data)
       setRecipes(data);
       return data;
     } catch (error) {
       console.error('파일을 읽는 중 에러가 발생했습니다:', error);
     }
+  };*/
+  const fetchRecipes = async () => {
+    const filePath = '/data/RecipeWithCal.json';
+    try {
+      const response = await fetch(filePath);
+      const data = await response.json();
+  
+      // f_materials를 배열로 변환
+      const recipesWithArrays = data.map((recipe) => ({
+        ...recipe,
+        f_materials: Array.isArray(recipe.f_materials)
+          ? recipe.f_materials
+          : [recipe.f_materials], // 문자열을 배열로 변환
+      }));
+  
+      setRecipes(recipesWithArrays);
+      return recipesWithArrays;
+    } catch (error) {
+      console.error('파일을 읽는 중 에러가 발생했습니다:', error);
+    }
   };
 
+  /*const handleSearchFilter = async () => {
+    try {
+      const data = await fetchRecipes();
+      let filteredRecipes;
+      
+      if (searchOption === 'foodName') {
+        filteredRecipes = data.filter((recipe) =>
+          recipe.f_name.includes(searchTerm)
+        );
+      } else if (searchOption === 'ingredientName') {
+        filteredRecipes = data.filter((recipe) => 
+        recipe.f_materials.some(material => 
+          material.includes(searchTerm)));
+      }
+
+      setRecipes(filteredRecipes);
+    } catch (error) {
+      console.error('데이터를 불러오는 중 에러가 발생했습니다:', error);
+    }
+  };
+  */
   const handleSearchFilter = async () => {
     try {
-      const data = await fetchRecipes(); // 여기서 데이터를 기다림
-      console.log(data)
-      const filteredRecipes = data.filter((recipes) =>
-        recipes.f_name.includes(searchTerm)
-      );
+      const data = await fetchRecipes();
+      let filteredRecipes;
+  
+      if (searchOption === 'foodName') {
+        filteredRecipes = data.filter((recipe) =>
+          recipe.f_name.includes(searchTerm)
+        );
+      } else if (searchOption === 'ingredientName') {
+        filteredRecipes = data.filter((recipe) =>
+          recipe.f_materials.some((material) =>
+            typeof material === 'string' && material.includes(searchTerm)
+          )
+        );
+      }
+  
       setRecipes(filteredRecipes);
     } catch (error) {
       console.error('데이터를 불러오는 중 에러가 발생했습니다:', error);
@@ -58,13 +109,16 @@ const Menu = () => {
           type='radio'
           name='radio1'
           value='foodName'
-          checked='true'
+          checked={searchOption === 'foodName'}
+          onChange={() => setSearchOption('foodName')}
         />
         음식명
         <input
           type='radio'
           name='radio1'
           value='ingredientName'
+          checked={searchOption === 'ingredientName'}
+          onChange={()=> setSearchOption('ingredientName')}
         />
         재료명
         <input
