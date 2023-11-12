@@ -10,12 +10,18 @@ const Menu = () => {
   const recipesPerPage = 6;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchOption, setSearchOption] = useState('foodName'); // 기본값은 음식명
-  const [maxTime, setMaxTime] = useState(99); // 예: 최대 요리 시간
-  const [maxCalories, setMaxCalories] = useState(600); // 예: 최대 칼로리
+  const [maxTime, setMaxTime] = useState(99); // 최대 요리 시간
+  const [maxCalories, setMaxCalories] = useState(600); // 최대 칼로리
+  const [selectedCategory, setSelectedCategory] = useState('all'); // 'all'은 전체 카테고리를 의미
+
 
   useEffect(() => { //전체데이터셋과 현재데이터셋에 json으로부터 읽어온 데이터셋을 담는다
     fetchRecipes();
   }, []); //컴포넌트가 마운트될때 한번만 실행
+
+  useEffect(() => {
+    handleSearchFilter();
+  }, [selectedCategory]); // selectedCategory가 변경될 때마다 useEffect 실행
 
   const fetchRecipes = async () => { //json에서 전체 데이터셋을 읽어오는 함수
     const filePath = '/data/RecipeWithCal.json';
@@ -29,6 +35,14 @@ const Menu = () => {
       console.error('파일을 읽는 중 에러가 발생했습니다:', error);
     }
   };
+
+  const filterByCategory = (recipes) => {
+    if (selectedCategory === 'all') {
+      return recipes;
+    }
+    return recipes.filter(recipe => recipe.category === selectedCategory);
+  };
+  
 
   const handleSearchFilter = () => { //전체데이터셋에서 검색을 실행한 결과를 현재데이터셋에 담는다
     
@@ -46,6 +60,7 @@ const Menu = () => {
       recipe.f_materials.some(material => 
         material.includes(searchTerm)));
     }
+    filteredRecipes = filterByCategory(filteredRecipes);
     setRecipes(filteredRecipes); //결과를 반영
   };
   
@@ -87,6 +102,50 @@ const Menu = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <input type='submit' value='검색' />
+        <div>
+          <input
+            type="radio"
+            name="category"
+            value="all"
+            checked={selectedCategory === 'all'}
+            onChange={() => setSelectedCategory('all')}
+          /> 전체
+          <input
+            type="radio"
+            name="category"
+            value="rice"
+            checked={selectedCategory === 'rice'}
+            onChange={() => setSelectedCategory('rice')}
+          /> 밥
+          <input
+            type="radio"
+            name="category"
+            value="dessert"
+            checked={selectedCategory === 'dessert'}
+            onChange={() => setSelectedCategory('dessert')}
+          /> 디저트
+          <input
+            type="radio"
+            name="category"
+            value="noodle"
+            checked={selectedCategory === 'noodle'}
+            onChange={() => setSelectedCategory('noodle')}
+          /> 국수
+          <input
+            type="radio"
+            name="category"
+            value="soup"
+            checked={selectedCategory === 'soup'}
+            onChange={() => setSelectedCategory('soup')}
+          /> 국
+          <input
+            type="radio"
+            name="category"
+            value="sideDish"
+            checked={selectedCategory === 'sideDish'}
+            onChange={() => setSelectedCategory('sideDish')}
+          /> 간식
+        </div>
       </form>
       <div>
         <label htmlFor="maxTime">최대 요리 시간:</label>
