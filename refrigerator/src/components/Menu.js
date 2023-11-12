@@ -10,6 +10,8 @@ const Menu = () => {
   const recipesPerPage = 6;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchOption, setSearchOption] = useState('foodName'); // 기본값은 음식명
+  const [maxTime, setMaxTime] = useState(99); // 예: 최대 요리 시간
+  const [maxCalories, setMaxCalories] = useState(600); // 예: 최대 칼로리
 
   useEffect(() => { //전체데이터셋과 현재데이터셋에 json으로부터 읽어온 데이터셋을 담는다
     fetchRecipes();
@@ -29,17 +31,22 @@ const Menu = () => {
   };
 
   const handleSearchFilter = () => { //전체데이터셋에서 검색을 실행한 결과를 현재데이터셋에 담는다
-    let filteredRecipes;
-    if (searchOption === 'foodName') {
-      filteredRecipes = allRecipes.filter(recipe =>
+    
+    //먼저 칼로리와 요리시간을 기준으로 한 필터 적용
+    let filteredRecipes = allRecipes.filter(recipe => 
+      recipe.f_time2 <= maxTime && recipe.calories <= maxCalories
+    );
+    
+    if (searchOption === 'foodName') { //적용된 필터에서 음식명을 기준으로 검색실행
+      filteredRecipes = filteredRecipes.filter(recipe =>
         recipe.f_name.includes(searchTerm)
       );
-    } else if (searchOption === 'ingredientName') {
-      filteredRecipes = allRecipes.filter(recipe => 
+    } else if (searchOption === 'ingredientName') { //적용된 필터에서 재료명을 기준으로 검색실행
+      filteredRecipes = filteredRecipes.filter(recipe => 
       recipe.f_materials.some(material => 
         material.includes(searchTerm)));
     }
-    setRecipes(filteredRecipes);
+    setRecipes(filteredRecipes); //결과를 반영
   };
   
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
@@ -81,6 +88,22 @@ const Menu = () => {
         />
         <input type='submit' value='검색' />
       </form>
+      <div>
+        <label htmlFor="maxTime">최대 요리 시간:</label>
+        <input 
+          type="number" 
+          id="maxTime" 
+          value={maxTime} 
+          onChange={(e) => setMaxTime(e.target.value)}
+        />
+        <label htmlFor="maxCalories">최대 칼로리:</label>
+        <input 
+          type="number" 
+          id="maxCalories" 
+          value={maxCalories} 
+          onChange={(e) => setMaxCalories(e.target.value)}
+        />
+    </div>
       <RecipeList
         recipes={recipes.slice(
           (currentPage - 1) * recipesPerPage,
