@@ -4,21 +4,23 @@ import React, { useState, useEffect } from 'react';
 import RecipeList from './RecipeList';
 
 const Menu = () => {
+  const [allRecipes, setAllRecipes] = useState([]); // 전체 레시피를 저장할 상태변수
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 6;
   const [searchTerm, setSearchTerm] = useState('');
   const [searchOption, setSearchOption] = useState('foodName'); // 기본값은 음식명
 
-  useEffect(() => {
+  useEffect(() => { //전체데이터셋과 현재데이터셋에 json으로부터 읽어온 데이터셋을 담는다
     fetchRecipes();
   }, []); //컴포넌트가 마운트될때 한번만 실행
 
-  const fetchRecipes = async () => {
+  const fetchRecipes = async () => { //json에서 전체 데이터셋을 읽어오는 함수
     const filePath = '/data/RecipeWithCal.json';
     try {
       const response = await fetch(filePath);
       const data = await response.json();
+      setAllRecipes(data);
       setRecipes(data);
       return data;
     } catch (error) {
@@ -26,25 +28,18 @@ const Menu = () => {
     }
   };
 
-  const handleSearchFilter = async () => {
-    try {
-      const data = await fetchRecipes();
-      let filteredRecipes;
-      
-      if (searchOption === 'foodName') {
-        filteredRecipes = data.filter((recipe) =>
-          recipe.f_name.includes(searchTerm)
-        );
-      } else if (searchOption === 'ingredientName') {
-        filteredRecipes = data.filter((recipe) => 
-        recipe.f_materials.some(material => 
-          material.includes(searchTerm)));
-      }
-
-      setRecipes(filteredRecipes);
-    } catch (error) {
-      console.error('데이터를 불러오는 중 에러가 발생했습니다:', error);
+  const handleSearchFilter = () => { //전체데이터셋에서 검색을 실행한 결과를 현재데이터셋에 담는다
+    let filteredRecipes;
+    if (searchOption === 'foodName') {
+      filteredRecipes = allRecipes.filter(recipe =>
+        recipe.f_name.includes(searchTerm)
+      );
+    } else if (searchOption === 'ingredientName') {
+      filteredRecipes = allRecipes.filter(recipe => 
+      recipe.f_materials.some(material => 
+        material.includes(searchTerm)));
     }
+    setRecipes(filteredRecipes);
   };
   
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
