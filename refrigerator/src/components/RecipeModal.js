@@ -14,7 +14,7 @@ const RecipeModal = ({ recipe, onClose }) => {
                     <img width={300} height={200} src={recipe.f_photo} alt={recipe.f_name}/>
                     <h3>재료</h3>
                     <ul className="ingredients-list">
-                        {recipe.f_materials.map((x, i) => <li key={i}>{x}</li>)}
+                        {recipe.f_materials.map((x, i) => <div key={i}>{x}</div>)}
                     </ul>
                     <h3>조리 순서</h3>
                     <ol className="cooking-steps">
