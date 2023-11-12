@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import RecipeList from './RecipeList';
 import FilterSearch from './FilterSearch';
+import RecipeModal from './RecipeModal';
 
 
 const Menu = () => {
@@ -15,7 +16,7 @@ const Menu = () => {
   const [maxTime, setMaxTime] = useState(99); // 최대 요리 시간
   const [maxCalories, setMaxCalories] = useState(600); // 최대 칼로리
   const [selectedCategory, setSelectedCategory] = useState('all'); // 'all'은 전체 카테고리를 의미
-
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => { //전체데이터셋과 현재데이터셋에 json으로부터 읽어온 데이터셋을 담는다
     fetchRecipes();
@@ -76,6 +77,16 @@ const Menu = () => {
     setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
 
+  const openModal = (recipe) => {
+    console.log('Opening modal for recipe:', recipe);
+    setSelectedRecipe(recipe);
+  };
+
+  const closeModal = () => {
+    console.log('Closing modal');
+    setSelectedRecipe(null);
+  };
+
   return (
     <>
       <h1>현재 메뉴 페이지에 위치</h1>
@@ -97,8 +108,9 @@ const Menu = () => {
         recipes={recipes.slice(
           (currentPage - 1) * recipesPerPage,
           currentPage * recipesPerPage
-        )}
+        )} onRecipeClick={openModal}
       />
+      <RecipeModal recipe={selectedRecipe} onClose={closeModal} />
       <div>
         <button onClick={prevPage} disabled={currentPage === 1}>
           이전
