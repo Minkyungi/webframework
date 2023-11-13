@@ -89,6 +89,10 @@ const Menu = () => {
     setSelectedRecipe(null);
   };
 
+  const subScribe = () =>{
+    //이곳에 찜하기 기능
+  }
+
   return (
     <>
       <h1>현재 메뉴 페이지에 위치</h1>
@@ -116,7 +120,7 @@ const Menu = () => {
           currentPage * recipesPerPage
         )} onRecipeClick={openModal}
       />
-      <RecipeModal recipe={selectedRecipe} onClose={closeModal} />
+      <RecipeModal recipe={selectedRecipe} onClose={closeModal} onSubscribe={subScribe} />
       <div>
         <button onClick={prevPage} disabled={currentPage === 1}>
           이전

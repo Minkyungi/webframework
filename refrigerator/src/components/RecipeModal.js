@@ -1,8 +1,9 @@
 // components/RecipeModal.js
 import React from 'react';
 import '../styles/RecipeModal.css'; // CSS 파일 임포트
+import { FaHeart } from "react-icons/fa";
 
-const RecipeModal = ({ recipe, onClose }) => {
+const RecipeModal = ({ recipe, onClose, onSubscribe }) => {
     if (!recipe) return null;
     let category;
     switch(recipe.category){
@@ -31,6 +32,7 @@ const RecipeModal = ({ recipe, onClose }) => {
                     <div>칼로리: {recipe.calories}</div>
                     <div>조리 시간: {recipe.f_time}</div>
                     <div>카테고리: {category}</div>
+                    <div>찜하기 <FaHeart onClick={onSubscribe} color='#FF0000'/></div>
 
                 </div>
                 <div className="modal-footer">
