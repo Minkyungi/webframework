@@ -12,7 +12,7 @@ const Home = () => {
   const [slideindex, setSlideIndex] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const openModal = () => {
+  const openModal = (recipe) => {
     setModalIsOpen(true);
   };
 
