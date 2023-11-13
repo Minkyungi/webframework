@@ -1,0 +1,92 @@
+/* ./components/Login.css*/
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  padding: 10px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.button-container button.active {
+  background-color: #007bff; /* 파란색 */
+  color: white;
+}
+
+.form-container {
+  text-align: center;
+  background-color: white;
+  padding: 10px; /* 내부 여백을 없앰 */
+  margin: 10px auto; /* 상단과 하단에 20px의 margin을 줘서 조금 아래로 위치하도록 설정 */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 500px;
+}
+
+.input-field {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.action-button {
+  padding: 12px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 90px;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.form-container button.back-home-button {
+  background-color: #ffeb3b;
+  padding: 12px;
+  margin: 10px;
+  width: 265%;  /* 수정된 부분 */
+  border-radius: 90px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  margin-left: -80%;  /* 수정된 부분 */
+}
+
+.form-container button.back-home-button {
+  background-color: #ffeb3b;
+}
+
+.register-button {
+  background-color: #28a745; /* 초록색 */
+}
+
+.login-button {
+  background-color: #007bff; /* 파란색 */
+}
+
+.logout-button {
+  background-color: #dc3545; /* 빨간색 */
+}
+
+.logged-in-info {
+  margin: 10px 0;
+  font-weight: bold;
+}
