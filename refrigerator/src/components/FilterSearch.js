@@ -2,7 +2,7 @@
 import React from 'react';
 
 const FilterSearch = ({ setSearchOption, setSearchTerm, setSelectedCategory, setMaxTime, setMaxCalories, handleSearchFilter
-, searchOption, selectedCategory, maxTime, maxCalories
+, searchOption, selectedCategory, maxTime, maxCalories, minTime, minCalories, setMinTime, setMinCalories
 }) => {
     return (
         <>
@@ -88,6 +88,22 @@ const FilterSearch = ({ setSearchOption, setSearchTerm, setSelectedCategory, set
                     id="maxCalories"
                     value={maxCalories}
                     onChange={(e) => setMaxCalories(e.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="minTime">최소 요리 시간:</label>
+                <input
+                    type="number"
+                    id="minTime"
+                    value={minTime}
+                    onChange={(e) => setMinTime(e.target.value)}
+                />
+                <label htmlFor="minCalories">최소 칼로리:</label>
+                <input
+                    type="number"
+                    id="minCalories"
+                    value={minCalories}
+                    onChange={(e) => setMinCalories(e.target.value)}
                 />
             </div>
         </>

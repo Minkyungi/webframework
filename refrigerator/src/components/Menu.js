@@ -15,6 +15,8 @@ const Menu = () => {
   const [searchOption, setSearchOption] = useState('foodName'); // 기본값은 음식명
   const [maxTime, setMaxTime] = useState(99); // 최대 요리 시간
   const [maxCalories, setMaxCalories] = useState(600); // 최대 칼로리
+  const [minTime, setMinTime] = useState(1); // 최소 요리 시간
+  const [minCalories, setMinCalories] = useState(100); // 최소 칼로리
   const [selectedCategory, setSelectedCategory] = useState('all'); // 'all'은 전체 카테고리를 의미
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -51,7 +53,7 @@ const Menu = () => {
     
     //먼저 칼로리와 요리시간을 기준으로 한 필터 적용
     let filteredRecipes = allRecipes.filter(recipe => 
-      recipe.f_time2 <= maxTime && recipe.calories <= maxCalories
+      recipe.f_time2 <= maxTime && recipe.calories <= maxCalories && recipe.f_time2 >= minTime && recipe.calories >= minCalories
     );
     
     if (searchOption === 'foodName') { //적용된 필터에서 음식명을 기준으로 검색실행
@@ -103,6 +105,10 @@ const Menu = () => {
         selectedCategory={selectedCategory}
         maxTime={maxTime}
         maxCalories={maxCalories}
+        minTime={minTime}
+        minCalories={minCalories}
+        setMinTime={setMinTime}
+        setMinCalories={setMinCalories}
       />
       <RecipeList
         recipes={recipes.slice(
