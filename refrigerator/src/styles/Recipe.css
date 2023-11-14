@@ -1,0 +1,25 @@
+/* styles/Recipe.css */
+.recipe-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .recipe-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .recipe-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .recipe-name {
+    padding: 8px;
+    display: block;
+    text-align: center;
+  }
+  

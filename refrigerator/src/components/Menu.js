@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import RecipeList from './RecipeList';
 import FilterSearch from './FilterSearch';
 import RecipeModal from './RecipeModal';
-
+import '../styles/Menu.css'
 
 const Menu = () => {
   const [allRecipes, setAllRecipes] = useState([]); // 전체 레시피를 저장할 상태변수
@@ -47,28 +47,28 @@ const Menu = () => {
     }
     return recipes.filter(recipe => recipe.category === selectedCategory);
   };
-  
+
 
   const handleSearchFilter = () => { //전체데이터셋에서 검색을 실행한 결과를 현재데이터셋에 담는다
-    
+
     //먼저 칼로리와 요리시간을 기준으로 한 필터 적용
-    let filteredRecipes = allRecipes.filter(recipe => 
+    let filteredRecipes = allRecipes.filter(recipe =>
       recipe.f_time2 <= maxTime && recipe.calories <= maxCalories && recipe.f_time2 >= minTime && recipe.calories >= minCalories
     );
-    
+
     if (searchOption === 'foodName') { //적용된 필터에서 음식명을 기준으로 검색실행
       filteredRecipes = filteredRecipes.filter(recipe =>
         recipe.f_name.includes(searchTerm)
       );
     } else if (searchOption === 'ingredientName') { //적용된 필터에서 재료명을 기준으로 검색실행
-      filteredRecipes = filteredRecipes.filter(recipe => 
-      recipe.f_materials.some(material => 
-        material.includes(searchTerm)));
+      filteredRecipes = filteredRecipes.filter(recipe =>
+        recipe.f_materials.some(material =>
+          material.includes(searchTerm)));
     }
     filteredRecipes = filterByCategory(filteredRecipes);
     setRecipes(filteredRecipes); //결과를 반영
   };
-  
+
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
 
   const nextPage = () => {
@@ -89,7 +89,7 @@ const Menu = () => {
     setSelectedRecipe(null);
   };
 
-  const subScribe = () =>{
+  const subScribe = () => {
     //이곳에 찜하기 기능
   }
 
@@ -121,12 +121,12 @@ const Menu = () => {
         )} onRecipeClick={openModal}
       />
       <RecipeModal recipe={selectedRecipe} onClose={closeModal} onSubscribe={subScribe} />
-      <div>
-        <button onClick={prevPage} disabled={currentPage === 1}>
+      <div className="pagination-container">
+        <button onClick={prevPage} disabled={currentPage === 1} className='button'>
           이전
         </button>
         <span>{`현재 페이지: ${currentPage}`}</span>
-        <button onClick={nextPage} disabled={currentPage === totalPages}>
+        <button onClick={nextPage} disabled={currentPage === totalPages} className='button'>
           다음
         </button>
       </div>
