@@ -1,0 +1,23 @@
+/* components/RecipeList.css */
+.recipe-list-container {
+    padding: 16px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3개의 칼럼으로 구성된 그리드 */
+    gap: 16px; /* 그리드 아이템 간격 */
+  }
+  
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 화면이 768px 이하일 때 2개의 칼럼으로 변경 */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* 화면이 480px 이하일 때 1개의 칼럼으로 변경 */
+    }
+  }
+  

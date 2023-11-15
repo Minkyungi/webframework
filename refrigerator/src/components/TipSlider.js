@@ -2,12 +2,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from 'styled-components';
-import Recipe from './Recipe';  // Recipe 컴포넌트를 불러옴
 import Tip from './Tip';
 import {AiOutlineLeft} from "react-icons/ai"
 import {AiOutlineRight} from "react-icons/ai"
 
-const MenuSlider =({recipes,onClick}) =>{
+const TipSlider =({tips,onClick}) =>{
 
   const StyledSlider = styled(Slider)`
     height: 100%;
@@ -61,15 +60,14 @@ const MenuSlider =({recipes,onClick}) =>{
 
   return (
     <div className="main-list-container">
-      <h2>〈오늘의 식단〉</h2>
+      <h2>〈오늘의 꿀팁〉</h2> {/* 줄바꿈 */}
       <StyledSlider {...settings}>
-      {recipes.slice(0, 8).map((recipe, index) => (
-          <Recipe key={index} recipe={recipe} onClick={() => onClick(recipe)}/>
+        {tips.slice(8).map((tip, index) => (
+          <Tip key={index} tip={tip} onClick={() => onClick(tip)}/>
         ))}
       </StyledSlider>
-      <br /> <br />
-      </div>
+    </div>
   );
 }
 
-export default MenuSlider;
+export default TipSlider;
