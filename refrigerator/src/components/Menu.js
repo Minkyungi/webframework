@@ -5,6 +5,8 @@ import RecipeList from './RecipeList';
 import FilterSearch from './FilterSearch';
 import RecipeModal from './RecipeModal';
 import '../styles/Menu.css'
+import Header from './Header';
+
 
 const Menu = () => {
   const [allRecipes, setAllRecipes] = useState([]); // 전체 레시피를 저장할 상태변수
@@ -27,6 +29,10 @@ const Menu = () => {
   useEffect(() => {
     handleSearchFilter();
   }, [selectedCategory]); // selectedCategory가 변경될 때마다 useEffect 실행
+
+  useEffect(()=>{
+    setCurrentPage(1);
+  },[recipes])
 
   const fetchRecipes = async () => { //json에서 전체 데이터셋을 읽어오는 함수
     const filePath = '/data/RecipeWithCal.json';
@@ -94,10 +100,8 @@ const Menu = () => {
   }
 
   return (
-    <>
-      <h1>현재 메뉴 페이지에 위치</h1>
-      <Link to="/">홈 페이지로 이동</Link>
-      <br />
+    <div className="menu">
+      <Header />
       <FilterSearch
         setSearchOption={setSearchOption}
         setSearchTerm={setSearchTerm}
@@ -130,7 +134,7 @@ const Menu = () => {
           다음
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

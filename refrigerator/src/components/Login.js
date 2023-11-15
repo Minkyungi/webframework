@@ -1,13 +1,33 @@
-// ./components/login.js
-import { Link } from 'react-router-dom';
+// ./components/Login.js
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import "../styles/Login.css"; // 스타일 파일 추가
 
 const Login = () => {
-    return (
-      <>
-        <h1>현재 로그인 페이지에 위치</h1>
-        <Link to="/">홈 페이지로 이동</Link>
-      </>
-    );
-  };
-  
-  export default Login;
+  const [showLogin, setShowLogin] = useState(true);
+
+  return (
+    <div className="login-container">
+      <div className="button-container">
+        <button
+          className={showLogin ? "active" : ""}
+          onClick={() => setShowLogin(true)}
+        >
+          Login
+        </button>
+        <button
+          className={!showLogin ? "active" : ""}
+          onClick={() => setShowLogin(false)}
+        >
+          Register
+        </button>
+      </div>
+      <div className="form-container">
+        {showLogin ? <LoginForm /> : <RegisterForm />}
+      </div>
+    </div>
+  );
+};
+
+export default Login;
