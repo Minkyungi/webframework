@@ -5,7 +5,7 @@ import Header from './Header';
 const Home = () => {
   return (
     <>
-      <Header />
+      <Header showFavoritesButton={false} />
       <h1>현재 홈 페이지에 위치</h1>
       <Link to="/menu">메뉴 페이지로 이동</Link>
       <p></p>

@@ -3,8 +3,8 @@ import React from 'react';
 import '../styles/RecipeModal.css'; // CSS 파일 임포트
 import { FaHeart } from "react-icons/fa";
 
-const RecipeModal = ({ recipe, onClose, onSubscribe }) => {
-    if (!recipe) return null;
+const RecipeModal = ({ recipe, onClose, user, handleToggleFavorite }) => {
+    if(!recipe) return null;
     let category;
     switch(recipe.category){
         case("rice") : category = "밥"; break;
@@ -13,6 +13,7 @@ const RecipeModal = ({ recipe, onClose, onSubscribe }) => {
         case("dessert") : category = "디저트"; break;
         case("sideDish") : category = "간식"; break;
     }
+    const isFavorite = user?.favorites?.includes(recipe.f_name);
 
     return (
         <div className="modal-backdrop">
@@ -32,8 +33,9 @@ const RecipeModal = ({ recipe, onClose, onSubscribe }) => {
                     <div>칼로리: {recipe.calories}</div>
                     <div>조리 시간: {recipe.f_time}</div>
                     <div>카테고리: {category}</div>
-                    <div>찜하기 <FaHeart onClick={onSubscribe} color='#FF0000'/></div>
-
+                    <button onClick={() => handleToggleFavorite(recipe.f_name)}>
+                        <FaHeart style={{ color: "red" }} /> 찜하기
+                    </button>
                 </div>
                 <div className="modal-footer">
                     <button onClick={onClose}>닫기</button>

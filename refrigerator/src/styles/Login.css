@@ -1,12 +1,4 @@
 /* ./components/Login.css*/
-body {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f8f9fa;
-}
 
 .button-container {
   display: flex;
