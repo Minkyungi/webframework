@@ -1,77 +1,77 @@
 /* FavoriteRecipeList 관련 스타일 */
 .modal-container1116 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7); /* 모달 외의 영역에 어둡게 처리 */
-}
-
-.modal-content1116 {
-  width: 80%;
-  max-width: 400px; /* 최대 너비를 더 크게 설정 */
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.h2class {
-  text-align: center;
-}
-
-.recipes-list1116 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 0;
-  list-style: none;
-}
-
-.recipe-item1116 {
-  margin: 10px;
-  width: 100px;
-  text-align: center;
-}
-
-.recipe-image1116 {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.recipe-details1116 {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: white;
-  padding: 10px;
-  z-index: 1;
-  width: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-
-.recipe-item1116:hover .recipe-details1116 {
-  display: block;
-}
-
-.favorite-recipes-modal .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  visibility: hidden; /* 기본적으로는 가려진 상태로 설정 */
-  transition: visibility 0s, opacity 0.5s linear; /* 트랜지션 효과를 추가 */
-}
-
-.recipe-item1116:hover .favorite-recipes-modal .close {
-  visibility: visible; /* 호버 상태일 때 표시되도록 설정 */
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7); /* 모달 외의 영역에 어둡게 처리 */
+  }
+  
+  .modal-content1116 {
+    width: 80%;
+    max-width: 400px; /* 최대 너비를 더 크게 설정 */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .h2class {
+    text-align: center;
+  }
+  
+  .recipes-list1116 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .recipe-item1116 {
+    margin: 10px;
+    width: 100px;
+    text-align: center;
+  }
+  
+  .recipe-image1116 {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .recipe-details1116 {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    padding: 10px;
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  .recipe-item1116:hover .recipe-details1116 {
+    display: block;
+  }
+  
+  .favorite-recipes-modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    visibility: hidden; /* 기본적으로는 가려진 상태로 설정 */
+    transition: visibility 0s, opacity 0.5s linear; /* 트랜지션 효과를 추가 */
+  }
+  
+  .recipe-item1116:hover .favorite-recipes-modal .close {
+    visibility: visible; /* 호버 상태일 때 표시되도록 설정 */
+  }

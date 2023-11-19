@@ -5,7 +5,7 @@ import FavoriteRecipeModal from './FavoriteRecipeModal';
 import AlertMessage from './AlertMessage';
 import { observeAuthState } from '../firebase-auth';
 
-const FavoriteRecipeList = ({ favoriteRecipes, onClose }) => {
+const FavoriteRecipeList = ({ favoriteRecipes, onClose,onToggleFavorite }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
@@ -59,6 +59,7 @@ const FavoriteRecipeList = ({ favoriteRecipes, onClose }) => {
               <div className="recipe-details1116">
                 <span className="recipe-name1116">{recipe.f_name}</span>
                 <p className="recipe-description1116">{recipe.f_description}</p>
+                <button onClick={() => onToggleFavorite(recipe)}>찜하기</button>
               </div>
             </li>
           ))}

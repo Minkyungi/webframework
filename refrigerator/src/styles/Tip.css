@@ -1,0 +1,27 @@
+/* styles/Tip.css */
+.tip-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    max-width: 500px; /* 카드의 최대 너비를 제한합니다 */
+    margin: auto; /* 카드를 그리드 셀 내부에서 가운데로 정렬합니다 */
+  }
+  
+  .tip-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tip-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .tip-name {
+    padding: 8px;
+    display: block;
+    text-align: center;
+  }
+  

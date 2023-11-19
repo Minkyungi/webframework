@@ -3,7 +3,7 @@ import React from 'react';
 import '../styles/RecipeModal.css'; // CSS 파일 임포트
 import { FaHeart } from "react-icons/fa";
 
-const RecipeModal = ({ recipe, onClose, user, handleToggleFavorite }) => {
+const RecipeModal_Home = ({ recipe, onClose, user, handleToggleFavorite }) => {
     if(!recipe) return null;
     let category;
     switch(recipe.category){
@@ -33,9 +33,6 @@ const RecipeModal = ({ recipe, onClose, user, handleToggleFavorite }) => {
                     <div>칼로리: {recipe.calories}</div>
                     <div>조리 시간: {recipe.f_time}</div>
                     <div>카테고리: {category}</div>
-                    <button onClick={() => handleToggleFavorite(recipe.f_name)}>
-                        <FaHeart style={{ color: "red" }} /> 찜하기
-                    </button>
                 </div>
                 <div className="modal-footer">
                     <button onClick={onClose}>닫기</button>
@@ -45,4 +42,4 @@ const RecipeModal = ({ recipe, onClose, user, handleToggleFavorite }) => {
     );
 };
 
-export default RecipeModal;
+export default RecipeModal_Home;

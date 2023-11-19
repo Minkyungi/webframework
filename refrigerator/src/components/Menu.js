@@ -9,7 +9,6 @@ import { observeAuthState } from '../firebase-auth';
 import '../styles/Menu.css'
 import Header from './Header';
 
-
 const Menu = () => {
   const [user, setUser] = useState(null);
   const [allRecipes, setAllRecipes] = useState([]); // 전체 레시피를 저장할 상태변수

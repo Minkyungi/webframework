@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import '../styles/Header.css';
 
-const Header = ({openFavoriteModal, showFavoritesButton = true}) => {
+const Header_Home = ({openFavoriteModal, showFavoritesButton = true}) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const auth = getAuth();
 
@@ -38,11 +38,12 @@ const Header = ({openFavoriteModal, showFavoritesButton = true}) => {
       <nav>
         {isAuthenticated ? (
           <>
-            {showFavoritesButton && <button onClick={handleOpenFavoriteModal}>찜한 목록</button>}
+            <Link to="/menu">레시피목록</Link>
             <button onClick={handleSignOut}>로그아웃</button>
           </>
         ) : (
           <>
+          <Link to="/menu">레시피목록</Link>
           <Link to="/login">로그인</Link>
           </>
         )}
@@ -51,4 +52,4 @@ const Header = ({openFavoriteModal, showFavoritesButton = true}) => {
   );
 };
 
-export default Header;
+export default Header_Home;
